@@ -1,0 +1,133 @@
+#### go内置函数（使用内置函数不用导包）
+
+1. len(str)：统计字符串长度，按`字节`进行统计
+
+    1. 注意：此方法是按字节统计的，汉字由于是uft-8编码，所以占3个字节。
+
+    ```go
+    package main
+    
+    import (
+    	"fmt"
+    )
+    
+    func main() {
+    	var str string = "hi golang, 你好!"
+        // len()按字节统计
+    	fmt.Println("str字符串的长度为：", len(str)) // 18
+    }
+    ```
+
+    
+
+2. []rune(str)：将字符串转换为切片
+
+    ```go
+    package main
+    
+    import (
+    	"fmt"
+    )
+    
+    func main() {
+    	var str string = "hi golang, 你好!"
+    	// 将字符串转换为切片
+    	r := []rune(str)
+    	// 由此可见切片中存储的值为utf-8编码
+    	fmt.Println(r)
+    	for i := 0; i < len(r); i++ {
+    		fmt.Printf("%c index is %d \n", r[i], i)
+    	}
+    }
+    
+    ```
+
+    
+
+    
+
+#### 常用库函数
+
+1. strconv.Atoi(string)  (int, err): 字符串转int
+2. strconv.ItoA(int) (string) : int 转字符串
+
+```go
+package main
+
+import (
+	"fmt"
+	"strconv"
+)
+
+func main() {
+	var str string = "66"
+	i, _ := strconv.Atoi(str)
+
+	fmt.Printf("字符串66使用strconv.Atoi后类型为 %T, 值为 %d \n", i, i)
+
+	var n int = 88
+
+	s := strconv.Itoa(n)
+	fmt.Printf("数字88使用strconv.Itoa后类型为 %T, 值为 %s", s, s)
+
+}
+
+```
+
+3. strings.Count(string, string) (int) : 统计一个字符串有几个指定的字串。
+
+    ```go
+    package main
+    
+    import (
+    	"fmt"
+    	"strings"
+    )
+    
+    func main() {
+    
+    	fmt.Println(strings.Count("jjhsgg,isjj", "jj")) // 2
+    
+    }
+    
+    ```
+
+4. strings.EqualFold(string, string) (bool): 不区分大小写判断两个字符是否相等。
+
+    ```go
+    package main
+    
+    import (
+    	"fmt"
+    	"strings"
+    )
+    
+    func main() {
+    
+    	fmt.Println(strings.EqualFold("JJ GG", "jj gg")) // true
+    
+    }
+    
+    ```
+
+    
+
+5. strings.Index(string, string) (int): 返回字串在字符串第一次出现的索引值(区分大小写)，没有则返回 -1.
+
+    ```go
+    package main
+    
+    import (
+    	"fmt"
+    	"strings"
+    )
+    
+    func main() {
+    
+    	fmt.Println(strings.Index("JJ GG", "GG")) // 3
+    
+    }
+    
+    ```
+
+![str-fn](../image/str-fn.png)
